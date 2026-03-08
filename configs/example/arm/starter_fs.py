@@ -46,6 +46,9 @@ from m5.objects import *
 from m5.options import *
 from m5.util import addToPath
 
+# from src.dev.virtio.VirtIO import PciVirtIO
+# from m5.objects import ArmKvmCPU
+
 m5.util.addToPath("../..")
 
 import devices
@@ -77,6 +80,7 @@ cpu_types = {
         O3_ARM_v7a.O3_ARM_v7a_DCache,
         O3_ARM_v7a.O3_ARM_v7aL2,
     ),
+    # "kvm": (ArmKvmCPU, None, None, None),  # <--- 加这一行！注意逗号
 }
 
 
@@ -100,12 +104,14 @@ def create(args):
     # Only simulate caches when using a timing CPU (e.g., the HPI model)
     want_caches = True if mem_mode == "timing" else False
 
+    readfile = "" if args.interactive_terminal else args.script
+
     system = devices.SimpleSystem(
         want_caches,
         args.mem_size,
         mem_mode=mem_mode,
         workload=ArmFsLinux(object_file=SysPaths.binary(args.kernel)),
-        readfile=args.script,
+        readfile=readfile,
     )
 
     MemConfig.config_mem(args, system)
@@ -113,13 +119,51 @@ def create(args):
     # Add the PCI devices we need for this system. The base system
     # doesn't have any PCI devices by default since they are assumed
     # to be added by the configuration scripts needing them.
-    system.pci_devices = [
-        # Create a VirtIO block device for the system's boot
-        # disk. Attach the disk image using gem5's Copy-on-Write
-        # functionality to avoid writing changes to the stored copy of
-        # the disk image.
+    # system.pci_devices = [
+    #     # Create a VirtIO block device for the system's boot
+    #     # disk. Attach the disk image using gem5's Copy-on-Write
+    #     # functionality to avoid writing changes to the stored copy of
+    #     # the disk image.
+    #     PciVirtIO(vio=VirtIOBlock(image=create_cow_image(args.disk_image)))
+    # ]
+
+    # 1. 先用一个普通的临时 Python 列表，收集默认的磁盘设备
+    my_pci_devices = [
         PciVirtIO(vio=VirtIOBlock(image=create_cow_image(args.disk_image)))
     ]
+
+    # # 2. 如果启动参数里带了 9P，就把 9P 设备也追加进这个临时列表
+    # if args.vio_9p:
+    #     vio_9p_device = VirtIO9PDiod()
+    #     vio_9p_device.root = args.vio_9p
+    #     # vio_9p_device.socketPath = os.path.join(m5.options.outdir, "9p.sock")
+    #     vio_9p_device.socketPath = os.path.abspath(os.path.join(m5.options.outdir, "9p.sock"))
+    #     my_pci_devices.append(PciVirtIO(vio=vio_9p_device))
+
+    # === 新增的 9P 挂载逻辑 ===
+    if args.vio_9p:
+        vio_9p_device = VirtIO9PDiod()
+        vio_9p_device.root = args.vio_9p
+
+        # 1. 定义绝对路径
+        sock_path = os.path.abspath(os.path.join(m5.options.outdir, "9p.sock"))
+
+        # 2. 核心修复：如果上次残留了 socket 文件，就把它删掉！
+        if os.path.exists(sock_path):
+            os.remove(sock_path)
+
+        # 3. 赋值路径
+        vio_9p_device.socketPath = sock_path
+
+        # system.virtio_9p = PciVirtIO(vio=vio_9p_device)
+        # my_pci_devices.append(system.virtio_9p)
+
+        my_pci_devices.append(PciVirtIO(vio=vio_9p_device))
+    # ==========================
+
+    # 3. 终极奥义：一次性把收集好的列表赋值给系统属性。
+    # 这会触发 gem5 底层的完美绑定，既没有孤儿，也不会重复注册 BAR0！
+    system.pci_devices = my_pci_devices
 
     # Attach the PCI devices to the system. The helper method in the
     # system assigns a unique PCI bus ID to each of the devices and
@@ -179,6 +223,10 @@ def create(args):
         # Tell Linux about the amount of physical memory present.
         f"mem={args.mem_size}",
     ]
+    if args.interactive_terminal:
+        # Boot directly into a root shell on the serial console.
+        kernel_cmd.append("init=/bin/bash")
+
     system.workload.command_line = " ".join(kernel_cmd)
 
     if args.with_pmu:
@@ -238,6 +286,12 @@ def main():
         help="Disk to instantiate",
     )
     parser.add_argument(
+        "--vio-9p",
+        type=str,
+        default=None,
+        help="Path to the host directory to share via VirtIO 9P",
+    )
+    parser.add_argument(
         "--root-device",
         type=str,
         default=default_root_device,
@@ -245,6 +299,11 @@ def main():
     )
     parser.add_argument(
         "--script", type=str, default="", help="Linux bootscript"
+    )
+    parser.add_argument(
+        "--interactive-terminal",
+        action="store_true",
+        help="Boot directly into an interactive shell on ttyAMA0.",
     )
     parser.add_argument(
         "--cpu",
