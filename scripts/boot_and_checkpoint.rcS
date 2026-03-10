@@ -1,0 +1,6 @@
+#!/bin/sh
+# Wait for the system to finish booting, then drop a checkpoint
+m5 checkpoint
+
+# Optional: keep the terminal alive so you can still use it after the checkpoint
+/bin/bash

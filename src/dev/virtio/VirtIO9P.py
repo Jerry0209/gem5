@@ -62,7 +62,8 @@ class VirtIO9PDiod(VirtIO9PProxy):
     cxx_header = "dev/virtio/fs9p.hh"
     cxx_class = "gem5::VirtIO9PDiod"
 
-    diod = Param.String("/usr/sbin/diod", "Path to diod, optionally in PATH")
+    # diod = Param.String("/usr/sbin/diod", "Path to diod, optionally in PATH") # On WSL2
+    diod = Param.String("/usr/local/sbin/diod", "Path to diod, optionally in PATH") # On eslsrv12
     root = Param.String("Path to export through diod")
     socketPath = Param.String("Unused socket to diod")
 
