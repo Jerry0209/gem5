@@ -225,7 +225,8 @@ def create(args):
     ]
     if args.interactive_terminal:
         # Boot directly into a root shell on the serial console.
-        kernel_cmd.append("init=/bin/bash")
+        # kernel_cmd.append("init=/bin/bash") # Enable mimimal bash but some proc, mounts won't be available.
+        pass
 
     system.workload.command_line = " ".join(kernel_cmd)
 

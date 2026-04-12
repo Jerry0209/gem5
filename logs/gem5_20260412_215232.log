@@ -1,0 +1,36 @@
+Global frequency set at 1000000000000 ticks per second
+warn: No dot file generated. Please install pydot to generate the dot file and pdf.
+src/mem/dram_interface.cc:690: warn: DRAM device capacity (8192 Mbytes) does not match the address range assigned (2048 Mbytes)
+src/sim/kernel_workload.cc:46: info: kernel located at: ../gem5_resources/vmlinux_wa
+src/base/loader/symtab.cc:95: warn: Cannot insert a new symbol table due to name collisions. Adding prefix to each symbol's name can resolve this issue.
+src/base/statistics.hh:279: warn: One of the stats is a legacy stat. Legacy stat is a stat that does not belong to any statistics::Group. Legacy stat is deprecated.
+src/base/statistics.hh:279: warn: One of the stats is a legacy stat. Legacy stat is a stat that does not belong to any statistics::Group. Legacy stat is deprecated.
+src/cpu/minor/execute.cc:164: warn: No functional unit for OpClass SimdUnitStrideSegmentedLoad
+src/cpu/minor/execute.cc:164: warn: No functional unit for OpClass SimdUnitStrideSegmentedStore
+src/cpu/minor/execute.cc:164: warn: No functional unit for OpClass SimdUnitStrideSegmentedFaultOnlyFirstLoad
+src/cpu/minor/execute.cc:164: warn: No functional unit for OpClass SimdStrideSegmentedLoad
+src/cpu/minor/execute.cc:164: warn: No functional unit for OpClass SimdStrideSegmentedStore
+system.vncserver: Listening for connections on port 5900
+system.terminal: Listening for connections on port 3456
+system.realview.uart1.device: Listening for connections on port 3457
+system.realview.uart2.device: Listening for connections on port 3458
+system.realview.uart3.device: Listening for connections on port 3459
+system.remote_gdb: Listening for connections on port 7000
+src/sim/serialize.hh:363: warn: optional parameter system.cpu_cluster.cpus:lastStopped not present
+src/dev/virtio/fs9p.cc:248: warn: Unserializing VirtIO9Base device after device has been used. It is likely that state has been lost, and that the device will cease to work!
+src/dev/virtio/fs9p.cc:412: info: Started diod with PID 117623, you might need to manually kill diod if gem5 crashes
+src/dev/arm/energy_ctrl.cc:252: warn: Existing EnergyCtrl, but no enabled DVFSHandler found.
+gem5 Simulator System.  https://www.gem5.org
+gem5 is copyrighted software; use the --copyright option for details.
+
+gem5 version 25.1.0.0
+gem5 compiled Mar 10 2026 00:49:10
+gem5 started Apr 12 2026 21:52:35
+gem5 executing on eslsrv12, pid 117475
+command line: ./build/ARM/gem5.fast -d output/run_20260412_215232 --stats-file=stats_20260412_215232.txt --dump-config=config_20260412_215232.json configs/example/arm/starter_fs.py --kernel=../gem5_resources/vmlinux_wa --disk-image=../gem5_resources/arm64-ubuntu-20220727.img --interactive-terminal --vio-9p=/home/thu/TiC-SAT --restore=/home/thu/gem5/output/run_20260412_195216/cpt.130181423886750 --cpu=minor
+
+src/arch/arm/insts/pseudo.cc:174: warn: 	instruction 'bti' unimplemented
+diod: diod_xattrwalk thu@stdin:/home/thu/TiC-SAT/transformer.o/security.capability: Operation not supported
+diod: caught SIGTERM: shutting down
+src/dev/virtio/fs9p.cc:469: info: Trying to kill diod with SIGKILL as SIGTERM failed 
+m5_exit instruction encountered (0) @ 207983901579500

@@ -1,0 +1,3 @@
+#!/bin/sh
+echo "[guest] staying in shell once"
+exec /bin/bash --noprofile --norc
