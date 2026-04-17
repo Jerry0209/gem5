@@ -19,6 +19,7 @@
 # ps -ef | grep gem5
 # kill -9 PID
 # ss -ltnp | grep 3456
+# ps -ef | grep gem5.fast | grep -v grep
 
 # tail -f logs/gem5_20260412_210000.log
 # screen -ls
@@ -128,7 +129,7 @@ echo "Run dir: ${run_dir}"
 
 # Screen
 screen -dmS "${session_name}" bash -lc "
-nice -n 10 ./build/ARM/gem5.fast \
+nice -n 0 ./build/ARM/gem5.fast \
     -d '${run_dir}' \
     --stats-file='${stats_filename}' \
     --dump-config='${config_filename}' \
