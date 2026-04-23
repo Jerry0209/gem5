@@ -144,7 +144,7 @@ def create(args):
     if args.vio_9p:
         vio_9p_device = VirtIO9PDiod()
         vio_9p_device.root = args.vio_9p
-
+        vio_9p_device.queueSize = 128
         # 1. 定义绝对路径
         sock_path = os.path.abspath(os.path.join(m5.options.outdir, "9p.sock"))
 

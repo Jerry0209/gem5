@@ -20,6 +20,7 @@
 # kill -9 PID
 # ss -ltnp | grep 3456
 # ps -ef | grep gem5.fast | grep -v grep
+# grep "Listening for connections" logs/gem5_20260418_000728.log
 
 # tail -f logs/gem5_20260412_210000.log
 # screen -ls
@@ -27,6 +28,24 @@
 # screen -r gem5_run_20260412_210000
 # Ctrl+a -> d
 # screen -S gem5_run_20260412_210000 -X quit
+
+
+
+# Without using 9p device
+# mkdir -p $HOME/gem5_disk
+# fdisk -l $HOME/gem5_resources/arm64-ubuntu-20220727.img
+
+# sudo mount -o loop,offset=105906176 \
+#   $HOME/gem5_resources/arm64-ubuntu-20220727.img \
+#   $HOME/gem5_disk
+
+# sudo mkdir -p $HOME/gem5_disk/root/sve_bin
+# sudo cp $HOME/TiC-SAT/test_prctl_sve $HOME/gem5_disk/root/sve_bin/
+# sudo cp $HOME/TiC-SAT/transformer_boss_menu_int_noTiling_CB_8_SVE_4.o $HOME/gem5_disk/root/sve_bin/
+# sudo chmod +x $HOME/gem5_disk/root/sve_bin/test_prctl_sve
+# sudo chmod +x $HOME/gem5_disk/root/sve_bin/transformer_boss_menu_int_noTiling_CB_8_SVE_4.o
+# sync
+# sudo umount $HOME/gem5_disk
 
 
 
@@ -98,6 +117,20 @@ echo "Run dir: ${run_dir}"
 #     --vio-9p=/home/thu/TiC-SAT \
 
 
+
+# New run with new kernel
+# ./build/ARM/gem5.fast \
+#     -d "${run_dir}" \
+#     --stats-file="${stats_filename}" \
+#     --dump-config="${config_filename}"\
+#     configs/example/arm/starter_fs.py \
+#     --kernel=$HOME/kernel-build/linux/vmlinux \
+#     --disk-image=../gem5_resources/arm64-ubuntu-20220727.img \
+#     --script=$(pwd)/scripts/drop_to_shell.rcS \
+#     --vio-9p=/home/thu/TiC-SAT \
+#     --cpu=atomic
+
+
 # Restore
 # ./build/ARM/gem5.fast \
 #     -d "${run_dir}" \
@@ -128,17 +161,38 @@ echo "Run dir: ${run_dir}"
 
 
 # Screen
+# screen -dmS "${session_name}" bash -lc "
+# nice -n 0 ./build/ARM/gem5.fast \
+#     -d '${run_dir}' \
+#     --stats-file='${stats_filename}' \
+#     --dump-config='${config_filename}' \
+#     configs/example/arm/starter_fs.py \
+#     --kernel=../gem5_resources/vmlinux_wa \
+#     --disk-image=../gem5_resources/arm64-ubuntu-20220727.img \
+#     --interactive-terminal \
+#     --vio-9p=/home/thu/TiC-SAT \
+#     --restore=/home/thu/gem5/output/run_20260412_195216/cpt.130181423886750 \
+#     --cpu=minor \
+#     > '${log_dir}/gem5_${TIMESTAMP}.log' 2>&1
+# "
+
+# echo "Started."
+# echo "Screen session: ${session_name}"
+# echo "Log file: ${log_dir}/gem5_${TIMESTAMP}.log"
+# echo "To inspect log: tail -f ${log_dir}/gem5_${TIMESTAMP}.log"
+
+# Screen new kernel
 screen -dmS "${session_name}" bash -lc "
 nice -n 0 ./build/ARM/gem5.fast \
     -d '${run_dir}' \
     --stats-file='${stats_filename}' \
     --dump-config='${config_filename}' \
     configs/example/arm/starter_fs.py \
-    --kernel=../gem5_resources/vmlinux_wa \
+    --kernel=$HOME/kernel-build/linux/vmlinux \
     --disk-image=../gem5_resources/arm64-ubuntu-20220727.img \
     --interactive-terminal \
     --vio-9p=/home/thu/TiC-SAT \
-    --restore=/home/thu/gem5/output/run_20260412_195216/cpt.130181423886750 \
+    --restore=/home/thu/gem5/output/run_20260423_115522/cpt.4042546229250 \
     --cpu=minor \
     > '${log_dir}/gem5_${TIMESTAMP}.log' 2>&1
 "

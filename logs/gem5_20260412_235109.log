@@ -31,3 +31,6 @@ command line: ./build/ARM/gem5.fast -d output/run_20260412_235109 --stats-file=s
 
 src/arch/arm/insts/pseudo.cc:174: warn: 	instruction 'bti' unimplemented
 diod: diod_xattrwalk thu@stdin:/home/thu/TiC-SAT/transformer_codebook.o/security.capability: Operation not supported
+diod: caught SIGTERM: shutting down
+src/dev/virtio/fs9p.cc:469: info: Trying to kill diod with SIGKILL as SIGTERM failed 
+m5_exit instruction encountered (0) @ 8531949738690500
