@@ -10,28 +10,26 @@ src/cpu/minor/execute.cc:164: warn: No functional unit for OpClass SimdUnitStrid
 src/cpu/minor/execute.cc:164: warn: No functional unit for OpClass SimdUnitStrideSegmentedFaultOnlyFirstLoad
 src/cpu/minor/execute.cc:164: warn: No functional unit for OpClass SimdStrideSegmentedLoad
 src/cpu/minor/execute.cc:164: warn: No functional unit for OpClass SimdStrideSegmentedStore
-system.vncserver: Listening for connections on port 5900
-system.terminal: Listening for connections on port 3456
-system.realview.uart1.device: Listening for connections on port 3457
-system.realview.uart2.device: Listening for connections on port 3458
-system.realview.uart3.device: Listening for connections on port 3459
-system.remote_gdb: Listening for connections on port 7000
+system.vncserver: Listening for connections on port 5903
+system.terminal: Listening for connections on port 3468
+system.realview.uart1.device: Listening for connections on port 3469
+system.realview.uart2.device: Listening for connections on port 3470
+system.realview.uart3.device: Listening for connections on port 3471
+system.remote_gdb: Listening for connections on port 7003
 src/sim/serialize.hh:363: warn: optional parameter system.cpu_cluster.cpus:lastStopped not present
-src/dev/virtio/fs9p.cc:412: info: Started diod with PID 153778, you might need to manually kill diod if gem5 crashes
+src/dev/virtio/fs9p.cc:412: info: Started diod with PID 146118, you might need to manually kill diod if gem5 crashes
 src/dev/arm/energy_ctrl.cc:252: warn: Existing EnergyCtrl, but no enabled DVFSHandler found.
 gem5 Simulator System.  https://www.gem5.org
 gem5 is copyrighted software; use the --copyright option for details.
 
 gem5 version 25.1.0.0
 gem5 compiled Mar 10 2026 00:49:10
-gem5 started Apr 23 2026 12:14:27
-gem5 executing on eslsrv12, pid 153649
-command line: ./build/ARM/gem5.fast -d output/run_20260423_121424 --stats-file=stats_20260423_121424.txt --dump-config=config_20260423_121424.json configs/example/arm/starter_fs.py --kernel=/home/thu/kernel-build/linux/vmlinux --disk-image=../gem5_resources/arm64-ubuntu-20220727.img --interactive-terminal --vio-9p=/home/thu/TiC-SAT --restore=/home/thu/gem5/output/run_20260423_115522/cpt.4042546229250 --cpu=minor
+gem5 started May  3 2026 22:50:10
+gem5 executing on eslsrv12, pid 145886
+command line: ./build/ARM/gem5.fast -d output/run_20260503_225008 --stats-file=stats_20260503_225008.txt --dump-config=config_20260503_225008.json configs/example/arm/starter_fs.py --kernel=/home/thu/kernel-build/linux/vmlinux --disk-image=../gem5_resources/arm64-ubuntu-20220727.img --interactive-terminal --vio-9p=/home/thu/TiC-SAT --restore=/home/thu/gem5/output/run_20260423_115522/cpt.4042546229250 --cpu=minor
 
 src/arch/arm/insts/pseudo.cc:174: warn: 	instruction 'bti' unimplemented
 src/arch/arm/insts/pseudo.cc:174: warn: 	instruction 'bti' unimplemented
 src/arch/arm/insts/pseudo.cc:174: warn: 	instruction 'csdb' unimplemented
-diod: diod_xattrwalk thu@stdin:/home/thu/TiC-SAT/transformer_boss_menu_int_noTiling_CB_8_SVE_4.o/security.capability: Operation not supported
-diod: caught SIGTERM: shutting down
-src/dev/virtio/fs9p.cc:469: info: Trying to kill diod with SIGKILL as SIGTERM failed 
-m5_exit instruction encountered (0) @ 17867380908001500
+diod: diod_xattrwalk thu@stdin:/home/thu/TiC-SAT/transformer_BERT_mini_int8_noTiling_4D_CB_8_SVE_128.o/security.capability: Operation not supported
+diod: diod_xattrwalk thu@stdin:/home/thu/TiC-SAT/gem5_profile_regions.tsv/security.capability: Operation not supported

@@ -369,6 +369,8 @@ def main():
 
     root = Root(full_system=True)
     root.system = create(args)
+    # Change SVE length
+    root.system.sve_vl = 4
 
     if args.restore is not None:
         m5.instantiate(args.restore)

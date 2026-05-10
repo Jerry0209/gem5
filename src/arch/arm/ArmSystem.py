@@ -377,7 +377,9 @@ class ArmSystem(System):
         False, "True if ASID is 16 bits in AArch64 (ARMv8)"
     )
     sve_vl = Param.SveVectorLength(
-        1, "SVE vector length in quadwords (128-bit)"
+        # 1, "SVE vector length in quadwords (128-bit)"
+        2, "SVE vector length in quadwords (256-bit)"
+        # 4, "SVE vector length in quadwords (512-bit)"
     )
     sme_vl = Param.SveVectorLength(
         1, "SME vector length in quadwords (128-bit)"
