@@ -370,7 +370,13 @@ def main():
     root = Root(full_system=True)
     root.system = create(args)
     # Change SVE length
-    root.system.sve_vl = 4
+    root.system.sve_vl = 1
+
+    # 1  = 128 bit
+	# 2  = 256 bit
+	# 4  = 512 bit
+	# 8  = 1024 bit
+    # 16 = 2048 bit   
 
     if args.restore is not None:
         m5.instantiate(args.restore)

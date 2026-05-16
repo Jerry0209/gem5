@@ -1,0 +1,34 @@
+Global frequency set at 1000000000000 ticks per second
+warn: No dot file generated. Please install pydot to generate the dot file and pdf.
+src/mem/dram_interface.cc:690: warn: DRAM device capacity (8192 Mbytes) does not match the address range assigned (2048 Mbytes)
+src/sim/kernel_workload.cc:46: info: kernel located at: /home/thu/kernel-build/linux/vmlinux
+src/base/loader/symtab.cc:95: warn: Cannot insert a new symbol table due to name collisions. Adding prefix to each symbol's name can resolve this issue.
+src/base/statistics.hh:279: warn: One of the stats is a legacy stat. Legacy stat is a stat that does not belong to any statistics::Group. Legacy stat is deprecated.
+src/base/statistics.hh:279: warn: One of the stats is a legacy stat. Legacy stat is a stat that does not belong to any statistics::Group. Legacy stat is deprecated.
+src/cpu/minor/execute.cc:164: warn: No functional unit for OpClass SimdUnitStrideSegmentedLoad
+src/cpu/minor/execute.cc:164: warn: No functional unit for OpClass SimdUnitStrideSegmentedStore
+src/cpu/minor/execute.cc:164: warn: No functional unit for OpClass SimdUnitStrideSegmentedFaultOnlyFirstLoad
+src/cpu/minor/execute.cc:164: warn: No functional unit for OpClass SimdStrideSegmentedLoad
+src/cpu/minor/execute.cc:164: warn: No functional unit for OpClass SimdStrideSegmentedStore
+system.vncserver: Listening for connections on port 5968
+system.terminal: Listening for connections on port 3636
+system.realview.uart1.device: Listening for connections on port 3637
+system.realview.uart2.device: Listening for connections on port 3638
+system.realview.uart3.device: Listening for connections on port 3639
+system.remote_gdb: Listening for connections on port 7045
+src/sim/serialize.hh:363: warn: optional parameter system.cpu_cluster.cpus:lastStopped not present
+src/dev/virtio/fs9p.cc:412: info: Started diod with PID 34483, you might need to manually kill diod if gem5 crashes
+src/dev/arm/energy_ctrl.cc:252: warn: Existing EnergyCtrl, but no enabled DVFSHandler found.
+gem5 Simulator System.  https://www.gem5.org
+gem5 is copyrighted software; use the --copyright option for details.
+
+gem5 version 25.1.0.0
+gem5 compiled Mar 10 2026 00:49:10
+gem5 started May 16 2026 02:14:30
+gem5 executing on eslsrv12, pid 34088
+command line: ./build/ARM/gem5.fast -d output/run_20260516_021428 --stats-file=stats_20260516_021428.txt --dump-config=config_20260516_021428.json configs/example/arm/starter_fs.py --kernel=/home/thu/kernel-build/linux/vmlinux --disk-image=../gem5_resources/arm64-ubuntu-20220727.img --interactive-terminal --vio-9p=/home/thu/TiC-SAT --restore=/home/thu/gem5/output/run_20260423_115522/cpt.4042546229250 --cpu=minor
+
+src/arch/arm/insts/pseudo.cc:174: warn: 	instruction 'bti' unimplemented
+src/arch/arm/insts/pseudo.cc:174: warn: 	instruction 'bti' unimplemented
+src/arch/arm/insts/pseudo.cc:174: warn: 	instruction 'csdb' unimplemented
+diod: diod_xattrwalk thu@stdin:/home/thu/TiC-SAT/transformer_BERT_base_int8_noTiling_4D_dense_baseline_SVE_128.o/security.capability: Operation not supported

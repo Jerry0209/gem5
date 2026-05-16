@@ -182,25 +182,25 @@ echo "Run dir: ${run_dir}"
 # echo "To inspect log: tail -f ${log_dir}/gem5_${TIMESTAMP}.log"
 
 # Screen new kernel (SVE Length= 128 bits)
-# screen -dmS "${session_name}" bash -lc "
-# nice -n 0 ./build/ARM/gem5.fast \
-#     -d '${run_dir}' \
-#     --stats-file='${stats_filename}' \
-#     --dump-config='${config_filename}' \
-#     configs/example/arm/starter_fs.py \
-#     --kernel=$HOME/kernel-build/linux/vmlinux \
-#     --disk-image=../gem5_resources/arm64-ubuntu-20220727.img \
-#     --interactive-terminal \
-#     --vio-9p=/home/thu/TiC-SAT \
-#     --restore=/home/thu/gem5/output/run_20260423_115522/cpt.4042546229250 \
-#     --cpu=minor \
-#     > '${log_dir}/gem5_${TIMESTAMP}.log' 2>&1
-# "
+screen -dmS "${session_name}" bash -lc "
+nice -n 0 ./build/ARM/gem5.fast \
+    -d '${run_dir}' \
+    --stats-file='${stats_filename}' \
+    --dump-config='${config_filename}' \
+    configs/example/arm/starter_fs.py \
+    --kernel=$HOME/kernel-build/linux/vmlinux \
+    --disk-image=../gem5_resources/arm64-ubuntu-20220727.img \
+    --interactive-terminal \
+    --vio-9p=/home/thu/TiC-SAT \
+    --restore=/home/thu/gem5/output/run_20260423_115522/cpt.4042546229250 \
+    --cpu=minor \
+    > '${log_dir}/gem5_${TIMESTAMP}.log' 2>&1
+"
 
-# echo "Started."
-# echo "Screen session: ${session_name}"
-# echo "Log file: ${log_dir}/gem5_${TIMESTAMP}.log"
-# echo "To inspect log: tail -f ${log_dir}/gem5_${TIMESTAMP}.log"
+echo "Started."
+echo "Screen session: ${session_name}"
+echo "Log file: ${log_dir}/gem5_${TIMESTAMP}.log"
+echo "To inspect log: tail -f ${log_dir}/gem5_${TIMESTAMP}.log"
 
 # Screen new kernel (SVE Length= 256 bits)
 # screen -dmS "${session_name}" bash -lc "
@@ -225,23 +225,23 @@ echo "Run dir: ${run_dir}"
 
 
 # Screen new kernel (SVE Length= 512 bits)
-screen -dmS "${session_name}" bash -lc "
-nice -n 0 ./build/ARM/gem5.fast \
-    -d '${run_dir}' \
-    --stats-file='${stats_filename}' \
-    --dump-config='${config_filename}' \
-    configs/example/arm/starter_fs.py \
-    --kernel=$HOME/kernel-build/linux/vmlinux \
-    --disk-image=../gem5_resources/arm64-ubuntu-20220727.img \
-    --interactive-terminal \
-    --vio-9p=/home/thu/TiC-SAT \
-    --restore=/home/thu/gem5/output/run_20260503_132054/cpt.23999404757250 \
-    --cpu=minor \
-    > '${log_dir}/gem5_${TIMESTAMP}.log' 2>&1
-"
+# screen -dmS "${session_name}" bash -lc "
+# nice -n 0 ./build/ARM/gem5.fast \
+#     -d '${run_dir}' \
+#     --stats-file='${stats_filename}' \
+#     --dump-config='${config_filename}' \
+#     configs/example/arm/starter_fs.py \
+#     --kernel=$HOME/kernel-build/linux/vmlinux \
+#     --disk-image=../gem5_resources/arm64-ubuntu-20220727.img \
+#     --interactive-terminal \
+#     --vio-9p=/home/thu/TiC-SAT \
+#     --restore=/home/thu/gem5/output/run_20260503_132054/cpt.23999404757250 \
+#     --cpu=minor \
+#     > '${log_dir}/gem5_${TIMESTAMP}.log' 2>&1
+# "
 
-echo "Started."
-echo "Screen session: ${session_name}"
-echo "Log file: ${log_dir}/gem5_${TIMESTAMP}.log"
-echo "To inspect log: tail -f ${log_dir}/gem5_${TIMESTAMP}.log"
+# echo "Started."
+# echo "Screen session: ${session_name}"
+# echo "Log file: ${log_dir}/gem5_${TIMESTAMP}.log"
+# echo "To inspect log: tail -f ${log_dir}/gem5_${TIMESTAMP}.log"
 
