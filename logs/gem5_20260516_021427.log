@@ -32,3 +32,4 @@ src/arch/arm/insts/pseudo.cc:174: warn: 	instruction 'bti' unimplemented
 src/arch/arm/insts/pseudo.cc:174: warn: 	instruction 'bti' unimplemented
 src/arch/arm/insts/pseudo.cc:174: warn: 	instruction 'csdb' unimplemented
 diod: diod_xattrwalk thu@stdin:/home/thu/TiC-SAT/transformer_BERT_base_int8_noTiling_2D_dense_baseline_SVE_128.o/security.capability: Operation not supported
+diod: diod_xattrwalk thu@stdin:/home/thu/TiC-SAT/gem5_profile_regions.tsv/security.capability: Operation not supported
