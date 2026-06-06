@@ -116,6 +116,7 @@ def create(args):
 
     MemConfig.config_mem(args, system)
 
+    # =================== Enable 9p shared filesystem ===================
     # Add the PCI devices we need for this system. The base system
     # doesn't have any PCI devices by default since they are assumed
     # to be added by the configuration scripts needing them.
@@ -127,42 +128,26 @@ def create(args):
     #     PciVirtIO(vio=VirtIOBlock(image=create_cow_image(args.disk_image)))
     # ]
 
-    # 1. 先用一个普通的临时 Python 列表，收集默认的磁盘设备
     my_pci_devices = [
         PciVirtIO(vio=VirtIOBlock(image=create_cow_image(args.disk_image)))
     ]
 
-    # # 2. 如果启动参数里带了 9P，就把 9P 设备也追加进这个临时列表
-    # if args.vio_9p:
-    #     vio_9p_device = VirtIO9PDiod()
-    #     vio_9p_device.root = args.vio_9p
-    #     # vio_9p_device.socketPath = os.path.join(m5.options.outdir, "9p.sock")
-    #     vio_9p_device.socketPath = os.path.abspath(os.path.join(m5.options.outdir, "9p.sock"))
-    #     my_pci_devices.append(PciVirtIO(vio=vio_9p_device))
 
-    # === 新增的 9P 挂载逻辑 ===
     if args.vio_9p:
         vio_9p_device = VirtIO9PDiod()
         vio_9p_device.root = args.vio_9p
         vio_9p_device.queueSize = 128
-        # 1. 定义绝对路径
+
         sock_path = os.path.abspath(os.path.join(m5.options.outdir, "9p.sock"))
 
-        # 2. 核心修复：如果上次残留了 socket 文件，就把它删掉！
         if os.path.exists(sock_path):
             os.remove(sock_path)
 
-        # 3. 赋值路径
         vio_9p_device.socketPath = sock_path
-
-        # system.virtio_9p = PciVirtIO(vio=vio_9p_device)
-        # my_pci_devices.append(system.virtio_9p)
 
         my_pci_devices.append(PciVirtIO(vio=vio_9p_device))
     # ==========================
 
-    # 3. 终极奥义：一次性把收集好的列表赋值给系统属性。
-    # 这会触发 gem5 底层的完美绑定，既没有孤儿，也不会重复注册 BAR0！
     system.pci_devices = my_pci_devices
 
     # Attach the PCI devices to the system. The helper method in the
